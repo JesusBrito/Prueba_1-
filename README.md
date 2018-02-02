@@ -1,1 +1,1 @@
-Se generó la ruta con el método POST para el envío de los datos y ademas se generó una ruta para la visualización de los datos, esta con el método GET
+Se generó la ruta con el método POST para el envío de los datos y ademas se generó una ruta para la visualización de estos mediante la utilización del método GET
