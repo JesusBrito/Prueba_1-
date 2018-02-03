@@ -5,6 +5,7 @@ var Puntos= require('../models/puntos');
 function guardarLinea(req,res){
 	var puntos = new Puntos();
 	var params= req.body;
+	
 	var lineaRestante;
 	var lineaDerecha;
 	var lineaIzquierda;
