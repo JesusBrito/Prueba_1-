@@ -15,10 +15,10 @@ function guardarLinea(req,res){
 
 	puntos.punto_inicial= params.x;
 	puntos.longitud= params.y;
-	lineaRestante= .10-puntos.longitud;
+	lineaRestante= 1-puntos.longitud;
 	puntoFinal= parseFloat(puntos.punto_inicial)+ parseFloat(puntos.longitud);
 
-	if(puntos.punto_inicial>.10||puntoFinal>.10){
+	if(puntos.punto_inicial>1||puntoFinal>1){
 		res.send('La línea está fuera del umbral');
 	}else if(lineaRestante<puntos.longitud){
 		res.send(lineaRestante+" No cabe otra línea de la misma longitud");
@@ -26,18 +26,19 @@ function guardarLinea(req,res){
 		//Línea sobrante a la izquierda
 		lineaIzquierda=puntos.punto_inicial;
 		//Línea sobrante a la derecha
-		lineaDerecha=.10-puntoFinal;
-
+		lineaDerecha=1-puntoFinal;
+		
+		//Evaluación si la línea dada está al centro
 		if(lineaIzquierda>=puntos.longitud && lineaDerecha>=puntos.longitud){
 			//Evaluación a la izquierda
-			for(var i=0;i<(puntos.punto_inicial*100);i++){
-				if(i+(parseFloat(puntos.longitud)*100)<=(puntos.punto_inicial*100)){
+			for(var i=0;i<(puntos.punto_inicial*10);i++){
+				if(i+(parseFloat(puntos.longitud)*10)<=(puntos.punto_inicial*10)){
 					valoresPermitidos.push(i);
 				}
 			}
 			//Evaluación a la derecha 
-			for(i=(puntoFinal*100);i<10;i++){
-				if(i+(parseFloat(puntos.longitud)*100)<=10){
+			for(i=(puntoFinal*10);i<10;i++){
+				if(i+(parseFloat(puntos.longitud)*10)<=10){
 					valoresPermitidos.push(i);
 				}
 			}
@@ -46,34 +47,37 @@ function guardarLinea(req,res){
 			if(aleatorio==0){
 				puntoInicialRespuesta=0;
 			}else{
-				puntoInicialRespuesta=(valoresPermitidos[aleatorio]/100);
-			}
-			res.status(200).send("Punto inicial: "+puntoInicialRespuesta+" Longitud: "+puntos.longitud);
-		}else if(lineaIzquierda>puntos.longitud){
-			valoresPermitidos=[];
-			for(var i=0;i<(puntos.punto_inicial*100);i++){
-				if(i+(parseFloat(puntos.longitud)*100)<=(puntos.punto_inicial*100)){
-					valoresPermitidos.push(i);
-				}
-			}
-			aleatorio= Math.round(Math.random()*(valoresPermitidos.length-1));
-			if(aleatorio==0){
-				puntoInicialRespuesta=0;
-			}else{
-				puntoInicialRespuesta=(valoresPermitidos[aleatorio]/100);
+				puntoInicialRespuesta=(valoresPermitidos[aleatorio]/10);
 			}
 			res.status(200).send("Punto inicial: "+puntoInicialRespuesta+" Longitud: "+puntos.longitud);
 		
-		}else if (lineaDerecha>puntos.longitud){
+		//Evaluación si la línea dada está a la izquierda
+		}else if(lineaIzquierda>puntos.longitud){
 			valoresPermitidos=[];
-
-			for(i=(puntoFinal*100);i<10;i++){
-				if(i+(parseFloat(puntos.longitud)*100)<=10){
+			for(var i=0;i<(puntos.punto_inicial*10);i++){
+				if(i+(parseFloat(puntos.longitud)*10)<=(puntos.punto_inicial*10)){
 					valoresPermitidos.push(i);
 				}
 			}
 			aleatorio= Math.round(Math.random()*(valoresPermitidos.length-1));
-			puntoInicialRespuesta=(valoresPermitidos[aleatorio]/100);
+			if(aleatorio==0){
+				puntoInicialRespuesta=0;
+			}else{
+				puntoInicialRespuesta=(valoresPermitidos[aleatorio]/10);
+			}
+			res.status(200).send("Punto inicial: "+puntoInicialRespuesta+" Longitud: "+puntos.longitud);
+		
+		//Evaluación si la línea dada está a la derecha
+		}else if (lineaDerecha>puntos.longitud){
+			valoresPermitidos=[];
+
+			for(i=(puntoFinal*10);i<10;i++){
+				if(i+(parseFloat(puntos.longitud)*10)<=10){
+					valoresPermitidos.push(i);
+				}
+			}
+			aleatorio= Math.round(Math.random()*(valoresPermitidos.length-1));
+			puntoInicialRespuesta=(valoresPermitidos[aleatorio]/10);
 			res.status(200).send(" Punto inicial: "+puntoInicialRespuesta+" Longitud: "+puntos.longitud);
 		}else{
 			res.send(lineaRestante+" No cabe otra línea de la misma longitud");	
