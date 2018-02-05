@@ -10,24 +10,19 @@ var rangos_utilizados_x;
 var rangos_utilizados_y;
 
 var cuadro = new Cuadro();
-	var cuadroRes= new Cuadro();
-	var horizontal;
-	var vertical;
-	var longitud;
-	var params;
-	var areaExterior=100;
-	var areaInterior=(longitud*longitud);
-	var areaRestante=areaExterior-areaInterior;
-	var puntoFinalH=horizontal+longitud;
-	var puntoFinalV=vertical+longitud;
-	var puntoFinalHA;
-	var puntoFinalVA;
-	var aleatorioH;
-	var aleatorioV;
-	var pasa_x;
-    var pasa_y;
-    var foundX;
-    var foundY;
+var cuadroRes= new Cuadro();
+var horizontal;
+var vertical;
+var longitud;
+var params;
+var puntoFinalH=horizontal+longitud;
+var puntoFinalV=vertical+longitud;
+var puntoFinalHA;
+var puntoFinalVA;
+var aleatorioH;
+var aleatorioV;
+var pasa_x;
+var pasa_y;
 
 function guardarCuadro(req, res) {
 	params = req.body;
@@ -35,7 +30,21 @@ function guardarCuadro(req, res) {
 	vertical = parseFloat(params.y);
 	longitud = parseFloat(params.z);
 	rangos_utilizados_x = new Array();
-	rangos_utilizados_y = new Array(); 
+	rangos_utilizados_y = new Array();
+
+	cuadro.val_horizontal=params.x;
+	cuadro.val_vertical=params.y;
+	cuadro.longitud=longitud;
+	cuadro.save((err, cuadrosStored)=>{
+		if (err){
+			console.log('Error al guardar el registro');
+		}else if(!cuadrosStored){
+				console.log('El registro no ha sido guardado');
+		}else{
+			console.log('El registro ha sido guardado');
+		}
+	});
+
 	try {
 		console.log('Antes del IF');
 	  	if(validar_puntos(horizontal, vertical, longitud, true)){
