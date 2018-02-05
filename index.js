@@ -2,8 +2,9 @@
 var mongoose= require('mongoose');
 var app = require('./app');
 var port= process.env.PORT|| 3072;
+var bd = process.env.MONGODB_URI || 'mongodb://localhost:27017/lineas';
 
-mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds125588.mlab.com:25588/heroku_2bn31mgv', { useMongoClient: true}, (err,res)=>{
+mongoose.connect(bd, { useMongoClient: true}, (err,res)=>{
 	if (err) {
 		throw err;
 	}else{
