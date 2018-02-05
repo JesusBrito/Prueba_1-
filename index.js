@@ -3,7 +3,7 @@ var mongoose= require('mongoose');
 var app = require('./app');
 var port= process.env.PORT|| 3072;
 
-mongoose.connect('mongodb://localhost:27017/lineas', { useMongoClient: true}, (err,res)=>{
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds125588.mlab.com:25588/heroku_2bn31mgv', { useMongoClient: true}, (err,res)=>{
 	if (err) {
 		throw err;
 	}else{
