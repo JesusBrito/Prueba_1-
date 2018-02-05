@@ -84,6 +84,7 @@ function guardarLinea(req,res){
 			res.send(lineaRestante+" No cabe otra línea de la misma longitud");	
 		}
 	}
+	
 	puntos.save((err, puntosStored)=>{
 		if (err){
 			console.log('Error al guardar el registro');
