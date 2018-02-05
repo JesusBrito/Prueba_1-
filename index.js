@@ -1,7 +1,7 @@
 'use strict'
 var mongoose= require('mongoose');
 var app = require('./app');
-var port= process.env.PORT|| 3978;
+var port= process.env.PORT|| 3072;
 
 mongoose.connect('mongodb://localhost:27017/lineas', { useMongoClient: true}, (err,res)=>{
 	if (err) {
