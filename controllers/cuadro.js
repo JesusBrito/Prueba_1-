@@ -1,6 +1,6 @@
 'use strict'
 
-var Cuadro= require('../models/cuadros');
+var Cuadros= require('../models/cuadros');
 
 var punto_inicial_x = 0;
 var punto_final_x = 1;
@@ -9,8 +9,8 @@ var punto_final_y = 1;
 var rangos_utilizados_x;
 var rangos_utilizados_y;
 
-var cuadro = new Cuadro();
-var cuadroRes= new Cuadro();
+var cuadro = new Cuadros();
+var cuadroRes= new Cuadros();
 var horizontal;
 var vertical;
 var longitud;
@@ -36,10 +36,10 @@ function guardarCuadro(req, res) {
 	cuadro.val_vertical=params.y;
 	cuadro.longitud=longitud;
 
-	cuadro.save((err, cuadroStored)=>{
+	cuadro.save((err, cuadrosStored)=>{
 		if (err){
 			console.log('Error al guardar el registro');
-		}else if(!cuadroStored){
+		}else if(!cuadrosStored){
 				console.log('El registro no ha sido guardado');
 		}else{
 			console.log('El registro ha sido guardado');
@@ -131,7 +131,7 @@ function validar_puntos(x,y,z,validar){
 }
 
 function verCuadros(req,res) {
-	Cuadro.find({}).sort({'_id':-1}).exec((err, cuadros) => {
+	Cuadros.find({}).sort({'_id':-1}).exec((err, cuadros) => {
         if(err) return res.status(500).send({message: 'Error en el servidor'});
             if(cuadros){
                 return res.status(200).send({cuadros});
