@@ -135,7 +135,7 @@ function saveCuadro(){
 }
 
 function verCuadros(req,res) {
-	Cuadros.find({}).sort({'_id':-1}).exec((err, cuadros) => {
+	Cuadro.find({}).sort({'_id':-1}).exec((err, cuadros) => {
         if(err) return res.status(500).send({message: 'Error en el servidor'});
             if(cuadros){
                 return res.status(200).send({cuadros});
