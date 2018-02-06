@@ -9,4 +9,4 @@ var CuadroSchema= Schema({
 	val_vertical: Number,
 	longitud: Number
 });
-module.exports = mongoose.model('Cuadros', CuadroSchema);
+module.exports = mongoose.model('Cuadro', CuadroSchema);

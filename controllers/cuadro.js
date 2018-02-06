@@ -1,6 +1,6 @@
 'use strict'
 
-var Cuadros= require('../models/cuadros');
+var Cuadro= require('../models/cuadros');
 
 var punto_inicial_x = 0;
 var punto_final_x = 1;
@@ -9,8 +9,8 @@ var punto_final_y = 1;
 var rangos_utilizados_x;
 var rangos_utilizados_y;
 
-var cuadro = new Cuadros();
-var cuadroRes= new Cuadros();
+var cuadro;
+var cuadroRes;
 var horizontal;
 var vertical;
 var longitud;
@@ -25,6 +25,8 @@ var pasa_x;
 var pasa_y;
 
 function guardarCuadro(req, res) {
+	cuadro = new Cuadro();
+	cuadroRes= new Cuadro();
 	params = req.body;
 	horizontal = parseFloat(params.x);
 	vertical = parseFloat(params.y);
@@ -36,15 +38,6 @@ function guardarCuadro(req, res) {
 	cuadro.val_vertical=params.y;
 	cuadro.longitud=longitud;
 
-	cuadro.save((err, cuadroStored)=>{
-		if (err){
-			console.log('Error al guardar el registro');
-		}else if(!cuadroStored){
-				console.log('El registro no ha sido guardado');
-		}else{
-			console.log('El registro ha sido guardado');
-		}
-	});
 	try {
 		console.log('Antes del IF');
 	  	if(validar_puntos(horizontal, vertical, longitud, true)){
@@ -63,6 +56,7 @@ function guardarCuadro(req, res) {
 		          		cuadroRes.val_horizontal=aleatorioH;
 						cuadroRes.val_vertical=aleatorioV;
 						cuadroRes.longitud=longitud;
+						saveCuadro();
 						return res.status(200).send({cuadro:cuadroRes});		
 		          		break;
 		          	}
@@ -126,6 +120,18 @@ function validar_puntos(x,y,z,validar){
 	}else{
 		console.log('Puntos no validos');
 	}
+}
+
+function saveCuadro(){
+	cuadro.save((err, cuadroStored)=>{
+		if (err){
+			console.log('Error al guardar el registro');
+		}else if(!cuadroStored){
+				console.log('El registro no ha sido guardado');
+		}else{
+			console.log('El CUADRO ha sido guardado');
+		}
+	});
 }
 
 function verCuadros(req,res) {
