@@ -36,17 +36,15 @@ function guardarCuadro(req, res) {
 	cuadro.val_vertical=params.y;
 	cuadro.longitud=longitud;
 
-	cuadro.save((err, cuadrosStored)=>{
+	cuadro.save((err, cuadroStored)=>{
 		if (err){
 			console.log('Error al guardar el registro');
-		}else if(!cuadrosStored){
+		}else if(!cuadroStored){
 				console.log('El registro no ha sido guardado');
 		}else{
 			console.log('El registro ha sido guardado');
 		}
 	});
-
-
 	try {
 		console.log('Antes del IF');
 	  	if(validar_puntos(horizontal, vertical, longitud, true)){

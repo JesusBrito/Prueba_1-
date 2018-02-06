@@ -3,6 +3,7 @@
 var Puntos= require('../models/puntos');
 
 function guardarLinea(req,res){
+	
 	var puntos = new Puntos();
 	var params= req.body;
 	
@@ -84,7 +85,7 @@ function guardarLinea(req,res){
 			res.send(lineaRestante+" No cabe otra línea de la misma longitud");	
 		}
 	}
-	
+
 	puntos.save((err, puntosStored)=>{
 		if (err){
 			console.log('Error al guardar el registro');
