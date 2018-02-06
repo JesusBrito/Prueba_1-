@@ -17,6 +17,7 @@ Ruta para insertar nueva linea:
 (POST) https://retonodejs.herokuapp.com/linea
 ![Ejemplo](/images/linea-2.png)
 Parámetros (key-value) del body:
+
 Key | Value
 ------------ | -------------
 x|"Punto inicial de la línea"
@@ -27,6 +28,7 @@ Ruta para la consulta de los cuadros:
 ![Ejemplo](/images/cuadro-2.png)
 
 Parámetros del body:
+
 Key | Value
 ------------ | -------------
 x|"Punto X"
